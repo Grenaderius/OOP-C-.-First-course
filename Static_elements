@@ -1,0 +1,30 @@
+1.	class MyClass {
+2.	public:
+3.	static int staticData;    // статичне поле
+
+4.	static void staticMethod() {
+5.	// тіло статичного методу
+6.	}
+
+7.	static MyClass staticObject;  // статичний об'єкт
+
+8.	static int getCount() {
+9.	return count;  // доступ до приватного статичного поля
+10.	}
+
+11.	private:
+12.	static int count;    // приватне статичне поле
+13.	};
+
+14.	// Ініціалізація статичних полів класу
+15.	int MyClass::staticData = 0;
+16.	int MyClass::count = 0;
+
+17.	int main() {
+18.	// Використання статичних елементів класу
+19.	MyClass::staticData = 10;
+20.	MyClass::staticMethod();
+21.	MyClass::staticObject.someMethod();
+
+22.	return 0;
+23.	}
