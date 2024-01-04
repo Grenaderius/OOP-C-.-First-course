@@ -1,0 +1,131 @@
+1.	void FinancialReportOnTouristsAndCategories(string scanner, int check){
+2.	fstream ReadFromTheMainList("MainList.txt");
+3.	int countOfLines = 0, sumOfMoneyForPeople = 0, sumOfMoneyForChild = 0, childs, flag = 0;
+4.	double baggage, sumOfMoneyForBaggage = 0, sum = 0, sumOfRandomSpendings = 0;
+5.	string delim = " ", line, token1, scanCategory, categorizer, lineMemorizer;
+
+6.	if(scanner == "y"){
+7.	cout << "Please print the number from 1 to 3 to see the list sorted by categories, where 1 = resting, 2 = baggage, 3 = shopping:\n";
+8.	cin >> scanCategory;
+
+9.	if(scanCategory == "1" || scanCategory == "2" || scanCategory == "3"){
+10.	if(scanCategory == "1"){
+11.	categorizer = "resting";
+12.	}else if(scanCategory == "2"){
+13.	categorizer = "baggage";
+14.	}else{
+15.	categorizer = "shopping";
+16.	}
+
+17.	while(getline(ReadFromTheMainList, line)){
+18.	size_t pos = 0;
+19.	int counter = 0; 
+20.	countOfLines++;
+
+21.	if(countOfLines > 2){
+22.	lineMemorizer = line;
+
+23.	while((pos = lineMemorizer.find(delim)) != std::string::npos){
+24.	counter++;
+25.	token1 = lineMemorizer.substr(0, pos);
+26.	lineMemorizer.erase(0, pos + delim.length());
+27.	if(counter == 10 && categorizer == token1){
+28.	flag = 1;
+29.	}
+30.	}
+31.	counter = 0;
+
+32.	if(flag == 1){
+33.	sumOfMoneyForPeople += 100;
+34.	stringstream ch, bg;
+
+35.	while((pos = line.find(delim)) != std::string::npos){
+36.	counter++;
+37.	token1 = line.substr(0, pos);
+38.	line.erase(0, pos + delim.length());
+39.	if(counter == 7){
+40.	ch << token1;
+41.	ch >> childs;
+42.	sumOfMoneyForChild += 50*childs;
+43.	sumOfRandomSpendings += -20 + rand() % 100;
+44.	}
+
+45.	if(counter == 9){
+46.	bg << token1;
+47.	bg >> baggage;
+48.	sumOfMoneyForBaggage += 2*baggage;
+49.	}
+
+50.	}
+51.	}
+
+52.	flag = 0;
+
+53.	}
+54.	}
+
+55.	sum = sumOfMoneyForBaggage + sumOfMoneyForChild + sumOfMoneyForPeople - sumOfRandomSpendings;
+56.	cout << "Amount of money for tourists - " << sumOfMoneyForPeople << "$\n";
+57.	cout << "Amount of money for childs - " << sumOfMoneyForChild << "$\n";
+58.	cout << "Amount of money for baggage - " << sumOfMoneyForBaggage << "$\n";
+59.	cout << "Amount of money for incidental expendes - " << sumOfRandomSpendings << "$\n";
+60.	cout << "Total amount of money for tourists - " << sum << "$\n";
+
+61.	}else{
+62.	cout << "There is no category by number - " << scanCategory << endl;
+63.	}
+
+
+64.	}else if(scanner == "n"){
+65.	while(getline(ReadFromTheMainList, line)){
+66.	size_t pos = 0;
+67.	int counter = 0; 
+68.	countOfLines++;
+
+
+69.	if(countOfLines > 2){
+70.	sumOfMoneyForPeople += 100;
+71.	stringstream ch, bg;		
+
+72.	while((pos = line.find(delim)) != std::string::npos){
+73.	counter++;
+74.	token1 = line.substr(0, pos);
+75.	line.erase(0, pos + delim.length());
+76.	if(counter == 7){
+77.	ch << token1;
+78.	ch >> childs;
+79.	sumOfMoneyForChild += 50*childs;
+80.	sumOfRandomSpendings += -20 + rand() % 100;
+81.	}
+
+82.	if(counter == 9){
+83.	bg << token1;
+84.	bg >> baggage;
+85.	sumOfMoneyForBaggage += 2*baggage;
+86.	}
+
+87.	}
+
+88.	}
+89.	}
+
+90.	if(check == 0){
+91.	sum = sumOfMoneyForBaggage + sumOfMoneyForChild + sumOfMoneyForPeople - sumOfRandomSpendings;
+92.	cout << "Amount of money for tourists - " << sumOfMoneyForPeople << "$\n";
+93.	cout << "Amount of money for childs - " << sumOfMoneyForChild << "$\n";
+94.	cout << "Amount of money for baggage - " << sumOfMoneyForBaggage << "$\n";
+95.	cout << "Amount of money for incidental expendes - " << sumOfRandomSpendings << "$\n";
+96.	cout << "Total amount of money for tourists - " << sum << "$\n";
+97.	}else if(check == 1){
+98.	TotalIncome = 0;
+99.	TotalExpenses = 0;
+100.	TotalExpenses = sumOfRandomSpendings;
+101.	TotalIncome = sumOfMoneyForBaggage + sumOfMoneyForChild + sumOfMoneyForPeople;
+
+102.	}
+
+103.	}else{
+104.	cout << "There is no answer like - " << scanner << endl;
+105.	}
+
+106.	}
