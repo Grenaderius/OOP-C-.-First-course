@@ -1,0 +1,15 @@
+1.	class BaseClass {
+2.	public:
+3.	virtual void print() {
+4.	std::cout << "Це базовий клас" << std::endl;
+5.	}
+6.	};
+7.	class DerivedClass : public BaseClass {
+8.	public:
+9.	void print() override {
+10.	std::cout << "Це похідний клас" << std::endl;
+11.	}
+12.	};
+
+1.	BaseClass* basePtr = new DerivedClass();
+2.	basePtr->print(); // Will call a function from a derived class
