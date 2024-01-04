@@ -1,0 +1,43 @@
+1.	#include <iostream>
+2.	#include <string>
+3.	// Базовий клас "Турист"
+4.	class Tourist {
+5.	protected:
+6.	std::string name;
+7.	public:
+8.	Tourist(const std::string& _name) : name(_name) {}
+9.	void displayInfo() {
+10.	std::cout << "Турист: " << name << std::endl;
+11.	}
+12.	};
+13.	// Похідний клас "Екскурсія", що успадковує властивості та методи від класу "Турист"
+14.	class Excursion : public Tourist {
+15.	private:
+16.	std::string destination;
+17.	public:
+18.	Excursion(const std::string& _name, const std::string& _destination)
+19.	: Tourist(_name), destination(_destination) {}
+20.	void displayInfo() {
+21.	Tourist::displayInfo();
+22.	std::cout << "Пункт призначення: " << destination << std::endl;
+23.	}
+24.	};
+25.	// Derived class "Hotel" that inherits properties and methods from class "Tourist"
+26.	class Hotel : public Tourist {
+27.	private:
+28.	std::string hotelName;
+29.	public:
+30.	Hotel(const std::string& _name, const std::string& _hotelName)
+31.	: Tourist(_name), hotelName(_hotelName) {}
+32.	void displayInfo() {
+33.	Tourist::displayInfo();
+34.	std::cout << "Готель: " << hotelName << std::endl;
+35.	}
+36.	};
+37.	int main() {
+38.	Excursion excursion("John", "Paris");
+39.	excursion.displayInfo();
+40.	Hotel hotel("Alice", "Marriott");
+41.	hotel.displayInfo();
+42.	return 0;
+43.	}
